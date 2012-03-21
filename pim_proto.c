@@ -31,7 +31,9 @@
  *  $Id: pim_proto.c,v 1.47 2003/05/28 22:57:16 pavlin Exp $
  */
 
+#ifndef __OpenBSD__
 #include <arpa/inet.h>
+#endif
 #include "defs.h"
 
 /*

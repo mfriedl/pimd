@@ -506,6 +506,10 @@ int main(int argc, char *argv[])
     if (!debug && !foreground) {
 	/* Detach from the terminal */
 	haveterminal = 0;
+#ifdef __OpenBSD__
+	if (daemon(1, 0) < 0)
+	    logit(LOG_ERR, errno, "failed to detach daemon");
+#else
 	if (fork())
 	    exit(0);
 	(void)close(0);
@@ -528,6 +532,7 @@ int main(int argc, char *argv[])
 	    perror("setsid");
 #endif /* TIOCNOTTY */
 #endif /* SYSV */
+#endif /* OpenBSD */
     } /* End of child process code */
 
     if (pidfile(NULL)) {

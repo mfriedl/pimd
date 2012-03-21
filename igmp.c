@@ -161,7 +161,7 @@ static void accept_igmp(ssize_t recvlen)
     }
     
     iphdrlen  = ip->ip_hl << 2;
-#ifdef RAW_INPUT_IS_RAW
+#if defined(RAW_INPUT_IS_RAW) || defined(__OpenBSD__)
     ipdatalen = ntohs(ip->ip_len) - iphdrlen;
 #else
     ipdatalen = ip->ip_len;
